@@ -1,0 +1,20 @@
+.case-ui-wrapper {
+  display: flex;
+  height: 100%;
+
+  .tasks-overview .user-overview {
+    flex: 1;
+  }
+
+  .tasks-overview {
+    border-right: 1px solid black;
+  }
+
+  .job-overview {
+    flex: 2;
+  }
+
+  .user-overview {
+    border-left: 1px solid black;
+  }
+}
