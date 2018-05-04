@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CaseUiPageComponent } from './case-ui-page.component';
+import { CaseUiPageComponent } from "./case-ui-page.component";
 
-describe('CaseUiPageComponent', () => {
+describe("CaseUiPageComponent", () => {
   let component: CaseUiPageComponent;
   let fixture: ComponentFixture<CaseUiPageComponent>;
 
@@ -19,7 +19,7 @@ describe('CaseUiPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -4,10 +4,17 @@
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
     "module": "es2015",
-    "types": []
+    "types": [
+      "core-js",
+      "jasmine",
+      "jasminewd2",
+      "lodash",
+      "node"
+    ]
   },
   "exclude": [
     "test.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "node_modules"
   ]
 }

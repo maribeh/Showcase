@@ -1,5 +1,9 @@
 import {Component} from "@angular/core";
-import {TaskService, TaskType} from "../core/task.service";
+import {
+  Task,
+  TaskService,
+  TaskType
+} from "../core/task/task.service";
 
 @Component({
   selector: "app-completed-tasks",
@@ -10,7 +14,7 @@ export class CompletedTasksComponent {
   constructor(private taskService: TaskService) {
   }
 
-  public retrieveCompletedTasks(): string[] {
+  retrieveCompletedTasks(): Task[] {
     return this.taskService.getTasks(TaskType.COMPLETED);
   }
 }

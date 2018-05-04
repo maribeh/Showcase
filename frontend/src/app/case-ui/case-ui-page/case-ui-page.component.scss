@@ -2,19 +2,12 @@
   display: flex;
   height: 100%;
 
-  .tasks-overview .user-overview {
-    flex: 1;
-  }
-
   .tasks-overview {
+    flex: 1;
     border-right: 1px solid black;
   }
 
-  .job-overview {
+  .task-ui {
     flex: 2;
-  }
-
-  .user-overview {
-    border-left: 1px solid black;
   }
 }
