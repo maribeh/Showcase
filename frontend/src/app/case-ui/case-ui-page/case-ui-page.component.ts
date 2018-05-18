@@ -4,15 +4,14 @@ import {
   OnInit
 } from "@angular/core";
 import {
-  EVENT_DOMAIN,
-  EVENT_NAME,
-  PostRobotService
-} from "../case-ui-common/api/post-robot/post-robot.service";
-import { PostRobotData } from "../case-ui-common/api/post-robot/post-robot.model";
-import {
   DomSanitizer,
   SafeResourceUrl
 } from "@angular/platform-browser";
+import {
+  CONSTANTS_SHARED,
+  PostRobotData,
+  PostRobotService
+} from "frontend-shared";
 
 @Component({
   selector: "educama-case-ui-page",
@@ -24,16 +23,22 @@ export class CaseUiPageComponent implements OnInit, OnDestroy {
 
   private dynamicFrameUrlListener: any;
 
+  private readonly EVENT_DOMAIN: string = "http://localhost:4200";
+
   constructor(private postRobotService: PostRobotService,
               private domSanitizer: DomSanitizer) {
   }
 
   ngOnInit(): void {
     this.dynamicFrameUrl = this.domSanitizer.bypassSecurityTrustResourceUrl("http://localhost:4201/");
-    this.dynamicFrameUrlListener = this.postRobotService.getInstance()
-                                       .on(EVENT_NAME, { domain: EVENT_DOMAIN }, (event: PostRobotData<any>) => {
-                                         this.dynamicFrameUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(event.data.url);
-                                       });
+    this.dynamicFrameUrlListener =
+      this.postRobotService.getInstance().on(
+        CONSTANTS_SHARED.POST_ROBOT.EVENT_NAME,
+        { domain: this.EVENT_DOMAIN },
+        (event: PostRobotData<any>) => {
+          this.dynamicFrameUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(event.data.url);
+        }
+      );
   }
 
   ngOnDestroy(): void {

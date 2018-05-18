@@ -5,10 +5,9 @@ import {
   TaskType
 } from "../core/task/task.service";
 import {
-  EVENT_DOMAIN,
-  EVENT_NAME,
+  CONSTANTS_SHARED,
   PostRobotService
-} from "../core/post-robot/post-robot.service";
+} from "frontend-shared";
 
 @Component({
   selector: "app-active-tasks",
@@ -16,6 +15,8 @@ import {
   styleUrls: [ "./active-tasks.component.scss" ]
 })
 export class ActiveTasksComponent {
+  private readonly EVENT_DOMAIN: string = "http://localhost:8080";
+
   constructor(private taskService: TaskService,
               private postRobotService: PostRobotService) {
   }
@@ -26,7 +27,12 @@ export class ActiveTasksComponent {
 
   loadDynamicFrame(src: string): void {
     this.postRobotService.getInstance()
-        .send(window.top, EVENT_NAME, { url: src }, { domain: EVENT_DOMAIN }).then(() => {
+        .send(
+          window.top,
+          CONSTANTS_SHARED.POST_ROBOT.EVENT_NAME,
+          { url: src },
+          { domain: this.EVENT_DOMAIN }
+        ).then(() => {
     });
   }
 }

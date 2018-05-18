@@ -1,6 +1,6 @@
-import {NgModule} from "@angular/core";
-import {CASE_UI_ROUTING} from "./routes/case-ui.routes";
-import { PostRobotService } from "./api/post-robot/post-robot.service";
+import { NgModule } from "@angular/core";
+import { CASE_UI_ROUTING } from "./routes/case-ui.routes";
+import { PostRobotService } from "frontend-shared";
 
 @NgModule({
   imports: [

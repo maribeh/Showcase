@@ -9,6 +9,3 @@ export class PostRobotService {
     return POST_ROBOT_INSTANCE;
   }
 }
-
-export const EVENT_NAME = "loadDynamicFrame";
-export const EVENT_DOMAIN = "http://localhost:4200";
