@@ -3,18 +3,8 @@ import {
   throwError as observableThrowError
 } from "rxjs";
 
-import {
-  catchError,
-  map
-} from "rxjs/operators";
+import { catchError } from "rxjs/operators";
 import { Injectable } from "@angular/core";
-import {
-  Headers,
-  Http,
-  RequestOptions,
-  Response,
-  URLSearchParams
-} from "@angular/http";
 
 import { HttpHelper } from "../helper/http.helper";
 import { Store } from "@ngrx/store";
@@ -23,6 +13,11 @@ import {
   AddErrorWithKeyAction,
   AddErrorWithTextAction
 } from "../../error/store/error.actions";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpParams
+} from "@angular/common/http";
 
 /*
  * Service to wrap REST HTTP calls and to provide a HAL-based API
@@ -31,13 +26,13 @@ import {
 export class RestClientService {
 
   private _baseUrl: string;
-  private _headers: Headers;
+  private _headers: HttpHeaders;
 
-  constructor(private _http: Http,
+  constructor(private _http: HttpClient,
               private _httpHelper: HttpHelper,
               private _store: Store<State>) {
     this._baseUrl = this._httpHelper.getRestApiBaseUrl();
-    this._headers = new Headers();
+    this._headers = new HttpHeaders();
   }
 
   /**
@@ -45,18 +40,17 @@ export class RestClientService {
    */
   public get(url: string, paramsMap?: Map<any, any>): Observable<any> {
     this._headers.set("Cache-Control", "no-cache");
-    let options = new RequestOptions({ headers: this._headers });
+    let options: any = { headers: this._headers };
     if (paramsMap) {
-      const requestParams: URLSearchParams = new URLSearchParams();
+      const requestParams: HttpParams = new HttpParams();
       paramsMap.forEach((key, value) => {
         requestParams.set(key, value);
       });
-      options = new RequestOptions({ headers: this._headers, search: requestParams });
+      options = { headers: this._headers, params: requestParams };
     }
     return this._http
-               .get(this._baseUrl + url, options)
+               .get<any>(this._baseUrl + url, options)
                .pipe(
-                 map(response => this.mapResponse(response)),
                  catchError(error => this.handleError(error))
                );
   }
@@ -66,14 +60,13 @@ export class RestClientService {
    */
   public post(url: string, body?: string): Observable<any> {
     this._headers.set("Content-Type", "application/json");
-    const options = new RequestOptions({ headers: this._headers });
+    const options = { headers: this._headers };
     if (body === null) {
       body = "";
     }
     return this._http
-               .post(this._baseUrl + url, body, options)
+               .post<any>(this._baseUrl + url, body, options)
                .pipe(
-                 map(response => this.mapResponse(response)),
                  catchError(error => this.handleError(error))
                );
   }
@@ -83,25 +76,15 @@ export class RestClientService {
    */
   public put(url: string, body?: string): Observable<any> {
     this._headers.set("Content-Type", "application/json");
-    const options = new RequestOptions({ headers: this._headers });
+    const options = { headers: this._headers };
     if (body === null) {
       body = "";
     }
     return this._http
-               .put(this._baseUrl + url, body, options)
+               .put<any>(this._baseUrl + url, body, options)
                .pipe(
-                 map(response => this.mapResponse(response)),
                  catchError(error => this.handleError(error))
                );
-  }
-
-  /**
-   * Generic response mapper. Since JSON is the object representation in java script,
-   * the mappers returns type any. The invoker can cast the response.
-   */
-  private mapResponse(res: Response): any {
-    const body: any = res.json();
-    return body || {};
   }
 
   private handleError(error: any) {
