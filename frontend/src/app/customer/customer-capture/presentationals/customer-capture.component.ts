@@ -49,7 +49,7 @@ export class CustomerCaptureComponent implements OnInit, DoCheck, OnDestroy {
         });
 
         // Disable the uuid form field
-        this.customerCaptureForm.get("uuid").disable(true);
+        this.customerCaptureForm.get("uuid").disable({onlySelf: true});
 
     }
 

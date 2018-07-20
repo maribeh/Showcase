@@ -3,7 +3,7 @@ import {Store} from "@ngrx/store";
 import {State} from "../../../app.reducers";
 import {Subscription} from "rxjs/Subscription";
 import {AirlineResource} from "../../flights-common/api/airlines/airline.resource";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {LazyLoadEvent} from "primeng/primeng";
 import {
   ChangeAirlinesPageAction, ChangeAirlinesSortingAction, InitializeAirlineSliceAction,

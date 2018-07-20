@@ -9,7 +9,7 @@ import {
 import {AirportSlice} from "../../flights-common/store/airports/airports.slice";
 import {SortOrder} from "../../../shared/enums/sort-order.enum";
 import {LazyLoadEvent} from "primeng/primeng";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {AirportResource} from "../../flights-common/api/airports/airport.resource";
 import {Subscription} from "rxjs/Subscription";
 import * as _ from "lodash";

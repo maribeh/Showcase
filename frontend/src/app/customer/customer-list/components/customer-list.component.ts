@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter, OnDestroy, OnInit} from "@angular/core";
 import {CustomerResource} from "../../customer-common/api/resources/customer.resource";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {LazyLoadEvent} from "primeng/components/common/api";
 import {Store} from "@ngrx/store";
 import {State} from "../../../app.reducers";
