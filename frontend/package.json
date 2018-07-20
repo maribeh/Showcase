@@ -9,7 +9,7 @@
     "serve": "ng serve",
     "build": "ng build",
     "prod": "ng build --prod",
-    "test": "ng test -sr --cc=true",
+    "test": "ng test --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "docs": "./node_modules/.bin/compodoc -p tsconfig.json -d docs",
